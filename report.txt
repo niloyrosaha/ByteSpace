@@ -1,0 +1,149 @@
+================================================================================
+DESIGN ANALYSIS REPORT — Course Explorer / Learning Paths (screenshot review)
+Date: 2026-10-01
+Scope: Full-page screenshot of the "Discover Your Passion…" through
+"Explore Diverse Learning Paths…" region of the ByteSpace landing page.
+All pixel values are visual estimates from the screenshot unless marked (verify).
+================================================================================
+
+1. OVERVIEW
+--------------------------------------------------------------------------------
+The screenshot shows the section we just restructured (CourseExplorer) PLUS two
+major blocks that exist in the design but are NOT yet implemented anywhere in
+the codebase:
+
+  [A] Intro heading + description            -> implemented (SectionIntro)
+  [B] Category filter chips row              -> MISSING (new element)
+  [C] 6 course cards (3 x 2 grid)            -> implemented (CourseCard), gaps found
+  [D] "Explore Diverse Learning Paths" intro -> implemented (SectionIntro)
+  [E] Learning-path category cards row       -> MISSING (new element)
+
+Background is plain white. Content is centered in a ~1200px container.
+The lime/yellow-green accent (project token secondary-500 #D4FB20) is used
+throughout: active chip, "26+" badges, category icon tiles.
+
+2. BLOCK [A] — SECTION INTRO
+--------------------------------------------------------------------------------
+- Heading: "Discover Your Passion, Build Your Skills"
+  * Poppins SemiBold, ~44px, line-height 1.2, tracking ~-0.01em, color #040819
+  * Wraps to 2 lines: "Discover Your Passion," / "Build Your Skills"
+  * Max width ~588px, centered                          -> matches our build
+- Description: gray #82868E, ~18px / 1.6, centered, ~2 lines
+  * Copy matches courses.ts exactly                     -> matches our build
+- Spacing below intro before chips: ~40-48px            (verify)
+
+3. BLOCK [B] — CATEGORY FILTER CHIPS ROW  *** NOT IMPLEMENTED ***
+--------------------------------------------------------------------------------
+A horizontally wrapping, center-aligned row of pill-shaped filter chips sits
+between the intro and the course cards, in 3 visual rows:
+
+  Row 1: Featured | Music | Drawing & Painting | Marketing | Animation |
+         Social Media | UI/UX Design | Creative Marketing
+  Row 2: Digital Illustration | Film & Video | Crafts |
+         Freelance & Entrepreneurship | Graphic Design | Photography
+  Row 3: Productivity | Web Development | Data Science | Cooking | + More
+
+Total: 19 category chips + 1 "+ More" link.  (verify exact copy/counts)
+
+Styling (estimates):
+  * Chips: white background, 1px light-gray border (~#E5E6E8/#CED0D3),
+    rounded-full, ~36px tall, padding ~16px horizontal, text ~14px dark
+    (Satoshi Medium), gap ~8-12px, rows centered.
+  * "Featured" is the ACTIVE chip: lime #D4FB20 background, no border,
+    dark text.
+  * "+ More": blue (#003BE2 family) text with a leading "+", appears as a
+    text link rather than a bordered chip.
+  * No icons inside chips — text only.
+
+This block was NOT part of the Frame3/Frame8/Frame9 plugin output. It must be
+built as a new component (e.g. CategoryFilter) with its own data list.
+
+4. BLOCK [C] — COURSE CARDS GRID (6 cards, 3 columns x 2 rows)
+--------------------------------------------------------------------------------
+Grid: 3 columns, ~40px gaps, card ~373px wide — matches our CourseExplorer
+flow layout.
+
+Per-card anatomy (top to bottom), compared to our CourseCard.tsx:
+
+  4.1 Cover image, inset ~16px, rounded ~12px                    -> matches
+  4.2 Meta chips OVERLAID on the bottom edge of the cover image:
+        "10 Lessons" | "2 hours 15 mins" | "90 Comments"
+      * Small white pills, ~24px tall, tiny ~10-12px gray text.
+      * Same three values on all 6 cards in the screenshot.      (verify)
+      *** NOT IMPLEMENTED — our CourseCard has no meta chips ***
+  4.3 Title row: title left, rating right ("4.5" + star icon)    -> matches
+      * Cards 4-6 show truncation ("Balancing Productivity an…",
+        "Mastering Money Manage…", "From Idea to Startup Succ…")
+        -> confirms line-clamp-1 with ~280px title width.        -> matches
+  4.4 "by purepearl studio" in blue #003BE2, ~12px               -> matches
+  4.5 Row: "Beginner" pill (light-gray bg, chart icon, ~12px text)
+      + overlapping avatar stack (4 x 32px, white overlap ring)
+      *** DISCREPANCY: in the design the "26+" badge is a FILLED LIME CIRCLE
+      (#D4FB20) with dark text. The plugin output (and our CourseCard) renders
+      it as a bare <div class="w-8 h-8"> with absolutely-positioned text and
+      NO lime background. Needs bg-secondary-500 rounded-full. ***
+  4.6 Price row: "$25" (blue #003BE2, Poppins ~20px semibold)
+      + "/lifetime" (gray #4F4F4F, ~12px)                        -> matches
+  4.7 Rating star color: appears mid-gray in the screenshot; plugin used
+      #CED0D3 (light gray).                                      (verify)
+
+Card container: white bg, rounded-3xl, 1px #CED0D3 border, ~384px tall
+-> matches our build.
+
+5. BLOCK [D] — "EXPLORE DIVERSE LEARNING PATHS AT BYTESPACE" INTRO
+--------------------------------------------------------------------------------
+- Same intro pattern as [A]; copy matches pathsIntro in courses.ts -> matches
+- Heading renders on ONE line here (~633px wide)                  -> matches
+- Gap above this block from the cards grid: ~90-110px             (verify)
+
+6. BLOCK [E] — LEARNING-PATH CATEGORY CARDS  *** NOT IMPLEMENTED ***
+--------------------------------------------------------------------------------
+A single row of 6 equal-width white cards sits under the [D] intro:
+
+  Design | Development | IT & Software | Business | Marketing | Photography
+
+Styling (estimates):
+  * Card: white bg, 1px light border (#E5E6E8/#CED0D3), rounded ~12-16px,
+    ~183-190px wide x ~120-140px tall, content centered.
+  * Icon tile: ~48px rounded-lg square, lime #D4FB20, black glyph:
+      - Design:      crossed tools (wrench/screwdriver)
+      - Development: hourglass-like glyph               (verify exact glyph)
+      - IT & Software: monitor/display
+      - Business:    stacked cylinder / database
+      - Marketing:   megaphone-style glyph
+      - Photography: camera
+  * Label below tile: dark ~16px medium text.
+  * Row gap ~16-20px; sits near the bottom of the screenshot with ~60-80px
+    bottom margin.
+
+This is the FIRST ROW of the Learning Paths section (Frame9's intro is already
+implemented; these cards are the content that follows it). Needs a new
+component (e.g. LearningPathCategories) + icon assets.
+
+7. DISCREPANCIES / ACTION ITEMS
+--------------------------------------------------------------------------------
+  [ ] HIGH  Build category filter chips row [B] — 19 chips + "+ More",
+            "Featured" active by default (lime). Not present in codebase.
+  [ ] HIGH  Build learning-path category cards row [E] — 6 icon cards.
+            Not present in codebase. Requires 6 black glyph icons on lime tiles
+            (source assets not yet identified in /public).
+  [ ] MED   Add meta chips ("10 Lessons", "2 hours 15 mins", "90 Comments")
+            overlaid on each card cover image — present in design, absent from
+            plugin output and our CourseCard.
+  [ ] MED   CourseCard "26+" badge must be a filled lime circle (#D4FB20) with
+            dark text — currently a transparent div with floating text.
+  [ ] LOW   Verify rating star color (#CED0D3 vs darker gray in screenshot).
+  [ ] LOW   Verify all pixel estimates marked (verify) against the source
+            design file before pixel-perfect implementation.
+
+8. ASSET NOTES
+--------------------------------------------------------------------------------
+- Card cover images (Frame.png … Frame(5).png) and avatar Ellipses already
+  exist under /public/images/categories/ and are used correctly.
+- No assets for the 6 category glyphs were found in /public — they must be
+  exported or drawn as SVGs before implementing block [E].
+- Chip row and meta chips need no new assets (pure CSS/SVG-free).
+
+================================================================================
+END OF REPORT
+================================================================================
