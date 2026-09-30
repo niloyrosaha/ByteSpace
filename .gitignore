@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# planning / docs (local markdown files — not for version control)
+/*.md
+!README.md
