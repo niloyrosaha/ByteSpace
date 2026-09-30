@@ -19,6 +19,15 @@ const satoshi = localFont({
   display: "swap",
 });
 
+// Clash Display is used only by the ByteSpace wordmark in Logo.tsx.
+const clashDisplay = localFont({
+  src: "../assets/fonts/ClashDisplay-Bold.woff2",
+  weight: "700",
+  style: "normal",
+  variable: "--font-clash",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "ByteSpace — Learn, Grow, Create",
   description:
@@ -31,7 +40,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${satoshi.variable}`}>
+    <html
+      lang="en"
+      className={`${poppins.variable} ${satoshi.variable} ${clashDisplay.variable}`}
+    >
       <body className="font-body text-body-m text-neutral-950 antialiased">{children}</body>
     </html>
   );
