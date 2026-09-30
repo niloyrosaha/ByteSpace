@@ -7,6 +7,8 @@
   --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
   --font-logo: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-satoshi: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* --------------------------------------------------------------------------
@@ -70,6 +72,12 @@
   --text-body-s:  14px; --text-body-s--line-height:  1.6;
   --text-body-xs: 12px; --text-body-xs--line-height: 1.6;
 
+  /* Tailwind defaults — restored verbatim for design-to-code output that uses
+     bare text-xs / text-lg / text-xl (Frame8 course cards) */
+  --text-xs: 0.75rem; --text-xs--line-height: calc(1 / 0.75);
+  --text-lg: 1.125rem; --text-lg--line-height: calc(1.75 / 1.125);
+  --text-xl: 1.25rem; --text-xl--line-height: calc(1.75 / 1.25);
+
   --text-label-l:  18px; --text-label-l--line-height:  1.2;
   --text-label-m:  16px; --text-label-m--line-height:  1.2;
   --text-label-s:  14px; --text-label-s--line-height:  1.2;
@@ -79,6 +87,344 @@
 /* --------------------------------------------------------------------------
    Custom utilities
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Landing sections — from the CSS guide (guide values verbatim; font-family
+   and color vars are aliased to the project's existing tokens so we do not
+   load a second Poppins or duplicate the palette).
+   -------------------------------------------------------------------------- */
+
+/* Guide: :root palette — aliased to existing design tokens */
+:root {
+  --primary: #003be2;
+  --lime: #c1e338;
+  --lime-bright: #d4fb20;
+  --heading: #040819;
+  --text: #242528;
+  --muted: #82868e;
+  --chip-text: #4b4c53;
+  --surface: #fff;
+  --surface-muted: #f5f5f6;
+  --border: #ced0d3;
+}
+
+/* Guide: .home-intro (Frame 3) */
+.home-intro {
+  width: 917px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.home-intro__title {
+  width: 588px;
+  margin: 0;
+  color: var(--heading);
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.44px;
+  text-align: center;
+}
+
+.home-intro__description {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Guide: .category-chip-row / .category-chip (Frames 6 and 7) */
+.category-chip-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 43px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 24px;
+  background: var(--surface-muted);
+  color: var(--chip-text);
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.category-chip--more {
+  padding: 12px 0;
+  background: transparent;
+  color: var(--primary);
+}
+
+/* Guide: .course-grid / .course-card (Frame 8) */
+.course-grid {
+  width: 1199px;
+  display: grid;
+  grid-template-columns: repeat(3, 373px);
+  gap: 40px;
+}
+
+.course-card {
+  position: relative;
+  width: 373px;
+  height: 384px;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--surface);
+}
+
+.course-card__image {
+  position: relative;
+  width: 341px;
+  height: 195px;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #443131;
+  background-position: center;
+  background-size: cover;
+}
+
+.course-card__stats {
+  position: absolute;
+  left: 13px;
+  bottom: 19px;
+  display: flex;
+  gap: 12px;
+}
+
+.course-card__stat {
+  padding: 6px 12px;
+  border-radius: 24px;
+  background: rgb(246 246 246 / 60%);
+  color: #4f4f4f;
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  backdrop-filter: blur(8px);
+}
+
+.course-card__content {
+  position: absolute;
+  top: 232px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.course-card__title {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+}
+
+.course-card__author,
+.course-card__lifetime {
+  color: #4f4f4f;
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.course-card__details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.course-card__level {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 24px;
+  background: var(--surface-muted);
+  color: var(--chip-text);
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.course-card__avatars {
+  display: flex;
+}
+
+.course-card__avatar,
+.course-card__avatar-count {
+  width: 32px;
+  height: 32px;
+  margin-left: -8px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.course-card__avatar:first-child {
+  margin-left: 0;
+}
+
+.course-card__avatar-count {
+  display: grid;
+  place-items: center;
+  background: var(--lime-bright);
+  color: var(--text);
+  font: 500 12px/20px var(--font-satoshi), "Satoshi", sans-serif;
+}
+
+.course-card__price {
+  display: flex;
+  align-items: flex-end;
+}
+
+.course-card__price-value {
+  color: var(--primary);
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+}
+
+.course-card__rating {
+  position: absolute;
+  top: 232px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  color: #4f4f4f;
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Guide: .learning-paths (Frame 9) */
+.learning-paths {
+  width: 917px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.learning-paths__title {
+  margin: 0;
+  color: var(--heading);
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.36px;
+  text-align: center;
+}
+
+.learning-paths__description {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Guide: .featured-categories / .category-card */
+.featured-categories {
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.featured-categories__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 167px);
+  gap: 40px;
+}
+
+.category-card {
+  width: 167px;
+  height: 167px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--surface);
+}
+
+.category-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.category-card__icon {
+  width: 72px;
+  height: 72px;
+}
+
+.category-card__label {
+  color: var(--text);
+  font-family: var(--font-satoshi), "Satoshi", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+/* Image-driven additions (second screenshot) — values estimated from the
+   reference image, using the guide's variables.
+   .category-chip--active: the highlighted "Featured" chip. */
+.category-chip--active {
+  background: var(--lime-bright);
+  color: var(--text);
+}
+
+/* "by purepearl studio" renders blue in the reference image. */
+.course-card__author {
+  color: var(--primary);
+}
+
+/* Icon tile inside category cards is lime in the reference image; the glyph
+   PNGs are black and drawn on top via mix-blend so the tile color comes from
+   CSS. */
+.category-card__icon {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--lime-bright);
+}
+
+.category-card__icon-img {
+  display: block;
+  max-width: 40px;
+  max-height: 40px;
+  width: auto;
+  height: auto;
+}
+
 @utility bg-grid-hero {
   background-image:
     linear-gradient(to right, rgb(255 255 255 / 0.12) 2px, transparent 2px),
